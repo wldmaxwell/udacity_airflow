@@ -5,7 +5,7 @@
 
 **Overview**
 
-This project builds an ETL pipeline on AWS Cloud for a music streaming service called Sparkify by extracting data from JSON files in S3, staging the data in Redshift, and transforming the data into a set of dimensional tables. This allows the Sparkify analytics team to analyze the song and user data to answer questions like “What day of the week are users listening the most?”
+This project builds an Airflow ETL Data Warehouse Pipeline for a music streaming company called Sparkify. This project aims to create improved automation, monitored, and data quality checks for Sparkify's ETL Pipeline. ”
 
 **Technologies used**
 
