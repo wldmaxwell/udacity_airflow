@@ -42,17 +42,8 @@ class SqlQueries:
     """)
     
     test_query = ("""
-        SELECT  (
-        SELECT COUNT(*)
-        FROM   song_table
-        ) AS song_table_count,
-        (
-        SELECT COUNT(*)
-        FROM   artist_table
-        ) AS artist_table_count,
-        (
-        SELECT COUNT(*)
-        FROM user_table
-        ) AS user_table_count
-    
+        SELECT count(*)
+        FROM songplays
+        where playid
+        is null
     """)

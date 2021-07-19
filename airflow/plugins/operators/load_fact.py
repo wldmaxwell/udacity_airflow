@@ -20,7 +20,7 @@ class LoadFactOperator(BaseOperator):
         # Map params here
         # Example:
         # self.conn_id = conn_id
-        self.redshift_conn_id = redsgift_conn_id
+        self.redshift_conn_id = redshift_conn_id
         self.table = table
         self.sql = sql
 

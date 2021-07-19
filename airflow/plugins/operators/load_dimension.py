@@ -31,7 +31,7 @@ class LoadDimensionOperator(BaseOperator):
     def execute(self, context):
         
         self.log.info('Getting AWS Credentails.....')
-        redshift = PostgresHook(postgres_conn_id=self.postgres_conn_id)
+        redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
         
         if self.truncate:
             self.log.info(f'Truncating table {self.table}...')

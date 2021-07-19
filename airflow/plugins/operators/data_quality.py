@@ -12,7 +12,8 @@ class DataQualityOperator(BaseOperator):
                  # Example:
                  # conn_id = your-connection-name
                  redshift_conn_id ="",
-                 sql=""
+                 sql="",
+                 expected_result="",
                  *args, **kwargs):
 
         super(DataQualityOperator, self).__init__(*args, **kwargs)
@@ -21,9 +22,21 @@ class DataQualityOperator(BaseOperator):
         # self.conn_id = conn_id
         self.redshift_conn_id = redshift_conn_id
         self.sql = sql
+        self.expected_result = expected_result
         
 
     def execute(self, context):
-        self.log.info('Not Done Finishing Quality CheckGetting AWS Credentials.......')
+        self.log.info('Getting AWS Credentials.......')
+        redshift_hook = PostgresHook(postgres_conn_id=self.redshift_conn_id)
+        self.log.info('Done Getting Credentials')
+        
+        self.log.info("Running Quality Check .....")
+        records = redshift_hook.get_records(self.sql)
+        if records[0][0] != self.expected_result:
+            raise ValueError(f"""
+                Quality Check Failed. {records[0][0]} does not equal {self.expected_result}
+                """)
+        else:
+            self.log.info("Quality Check Passed ....")
         
         

@@ -3,8 +3,11 @@ import configparser
 import os
 from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators import (StageToRedshiftOperator, LoadFactOperator,
-                                LoadDimensionOperator, DataQualityOperator, PostgresOperator)
+from operators.stage_redshift import StageToRedshiftOperator
+from operators.load_fact import LoadFactOperator
+from operators.load_dimension import LoadDimensionOperator
+from operators.data_quality import DataQualityOperator
+from airflow.operators.postgres_operator import PostgresOperator
 from helpers import SqlQueries
 
 # AWS_KEY = os.environ.get('AWS_KEY')
@@ -52,7 +55,7 @@ stage_songs_to_redshift = StageToRedshiftOperator(
     dag=dag,
     redshift_conn_id='redshift',
     aws_credentials_id='aws_credentials',
-    table='stage_songs',
+    table='staging_songs',
     s3_bucket='udacity-dend',
     s3_key='song_data',
     region='us-west-2',
@@ -104,7 +107,8 @@ run_quality_checks = DataQualityOperator(
     task_id='Run_data_quality_checks',
     dag=dag,
     redshift_conn_id='redshift',
-    sql=SqlQueries.test_queries
+    sql=SqlQueries.test_query,
+    expected_result=0
 )
 
 end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)

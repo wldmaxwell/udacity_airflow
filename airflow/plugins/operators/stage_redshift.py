@@ -6,10 +6,11 @@ from airflow.utils.decorators import apply_defaults
 class StageToRedshiftOperator(BaseOperator):
     ui_color = '#358140'
 
-    copy_sql_json = """
+    copy_sql = """
             COPY {}
             FROM '{}'
             ACCESS_KEY_ID '{}'
+            SECRET_ACCESS_KEY '{}'
             REGION AS '{}'
             FORMAT AS json '{}'
 
