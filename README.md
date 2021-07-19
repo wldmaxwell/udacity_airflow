@@ -92,46 +92,22 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 *   Songplay table
     *   9957 song plays
 
-**Queries Examples from Test_Queries.ipynb**
-
-1. Give me the artist, song title and song's length of the top 15 songs by duration.
-
-
+**Test Query from sql_queries.py**
 
 *   **Query:** 
 
-		SELECT a.artist_name, s.title, s.duration 
+		SELECT count(*)
 		     
-		FROM artist a
+		FROM songplays
 
-		JOIN song s on (a.artist_id = s.artist_id)
+		WHERE playid
 
-		ORDER BY s.duration DESC limit 15;
-
-
-
-*   **Query Result Example First Row:** Jean Grae, Chapter One: Destiny, 2709
-
-2. Give me the total number of listens each day of the week ordered in Descending Order.
-	
-*   **Query:**
-
-		SELECT t.weekday, count(s.songplay_id) as number_of_listens_each_day
-	
-		FROM time t
-	
-		JOIN songplay s  on (t.start_time = s.start_time)
-
-		GROUP BY t.weekday
-	
-		ORDER BY number_of_listens_each_day DESC;
+		is null;
 
 
 
-*   **Query Result Example First Row:** 5, 1966
-    *   Users listen the most on Saturdays
-
-	
+*   **Expected Query Result:** 0
+	* If query result is not 0 throw Error "Quality Check Failed. {records[0][0]} does not equal {self.expected_result}"
 
 **Database Info and Tables**
 
