@@ -3,7 +3,11 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 class DataQualityOperator(BaseOperator):
-
+    """
+        :Param string redshift_conn_id: What Redshift Database are you connecting to.
+        :Param string sql: What SQL command are you using for your quality test.
+        :Param string expected_result: What do you want your query result to be for your quality check to pass.
+    """
     ui_color = '#89DA59'
 
     @apply_defaults

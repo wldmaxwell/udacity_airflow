@@ -3,6 +3,12 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 class LoadFactOperator(BaseOperator):
+    """
+        :Param redshift_conn_id: What Redshift Database are you connecting to.
+        :Param table: Staging table name you are loading data into.
+        :Param sql: SQL Command to Load data into dimension tables from staging tables.
+   
+    """
 
     ui_color = '#F98866'
 

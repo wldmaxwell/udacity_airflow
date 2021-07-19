@@ -4,6 +4,16 @@ from airflow.contrib.hooks.aws_hook import AwsHook
 from airflow.utils.decorators import apply_defaults
 
 class StageToRedshiftOperator(BaseOperator):
+    """
+        :Param redshift_conn_id: What Redshift Database are you connecting to.
+        :Param aws_credentials_id: AWS User credentials you have saved in Airflow Connections.
+        :Param table: Staging table name you are loading data into.
+        :Param s3_bucket: Amazon S3 Bucket Name.
+        :Param s3_key: Object Key Name in S3 Bucket.
+        :Param copy_json_option: How do you want your JSON to be copied.
+        :Param region: What region is your S3 bucket located.
+        Link to Copy JSON Options: https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html
+    """
     ui_color = '#358140'
 
     copy_sql = """
