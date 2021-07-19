@@ -1,5 +1,5 @@
 
-**Project Three: Data Warehouse**
+**Project Three: Data Pipeline With Airflow and Redshift**
 
  
 
@@ -12,36 +12,40 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 *   SQL -
-    *   Used for dropping, creating, inserting, copying JSON files, and running test queries 
+    *   Used for creating, inserting, copying JSON files, and running test queries 
 *   Python 
-    *   Boto3 - Amazon SDK
-        *   Used to create IAM Role, Redshift Cluster, and run SQL Queries 
+    * Used to Create Airflow Operators and Functions  
 *   Redshift
     *   Data Warehouse used to Stage data from S3 and create dimension tables for analytics team
 *   S3 
     *   Storage service that holds event and song data JSON files
+* Apache Airflow
+    * Workflow Managment Tool
 
 **How to Run**
 
 
 
-*   AWS
-    *   Creating_Warehouse.ipynb
-        *   Used to Create IAM Role, Redshift Cluster
+*   AWS 
     *   Create an IAM user 
         *   With permissions to use Redshift
     *   Create IAM role for Redshift with AmazonS3ReadOnlyAccess rights
-        *   Need the ARN
     *   Create the Redshift cluster
         *   Get the Endpoint ---- also known as Host
-*   Fill in the dwh.cfg with your info
-    *   Key, Secret, Host, ARN, etc
-*   Run create_tables.py
-    *   Drops and Creates Tables
-*   Run etl.py
-    *   Copies and Inserts data into tables
-*   Test_queries.ipynb
-    *   Jupyter Notebook used to run test queries
+*   Airflow
+    * Set up Connection for AWS
+        * Conn Id: Enter aws_credentials.
+        * Conn Type: Enter Amazon Web Services.
+        * Login: Enter your Access key ID from the IAM User credentials
+        * Password: Enter your Secret access key from the IAM User credentials
+     * Set up Redshift Connection
+        * Conn Id: Enter redshift.
+        * Conn Type: Enter Postgres.
+        * Host: Enter the endpoint of your Redshift cluster, excluding the port at the end.
+        * Schema: Enter dev. This is the Redshift database you want to connect to.
+        * Login: Enter awsuser.
+        * Password: Enter the password you created when launching your Redshift cluster.
+        * Port: Enter 5439. 
 
 **Information About Dataset**
 
